@@ -3,7 +3,7 @@ const {Circle, Triangle, Square} = require('./lib/shapes');
 const SVG = require("./lib/svg");
 const fs = require("fs");
 
-
+// Prompts user to go through list 
 inquirer.prompt([
     {
         type: 'list',
@@ -31,12 +31,14 @@ inquirer.prompt([
    const shape = createShape(answers); 
    const svg = new SVG(answers.text, answers.textColor, shape);
    console.log(svg.render());
+   //Creates the logo in the dist folder
    fs.writeFile("./dist/logo.svg", svg.render(), function(err) {
     if(err) throw err
     console.log("File succesfully written");
    })
 })
 
+//Will choose a shape class determined by what the user picks
 function createShape({shape, color}) {
 if (shape === 'Circle') {
     return new Circle(color);
